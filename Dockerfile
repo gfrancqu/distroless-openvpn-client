@@ -1,7 +1,7 @@
 FROM gcc as builder
 
-ENV VERSION 2.4.6
-ENV OPENSSL_VERSION 1_1_1b
+ENV VERSION 2.4.7
+ENV OPENSSL_VERSION 1_1_1c
 ENV LZO_VERSION 2.10
 
 # downloads openssl, lzo, openvpn and net tools

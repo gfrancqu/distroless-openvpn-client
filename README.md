@@ -27,3 +27,26 @@ try to reach ifconfig.me, `curl ifconfig.me`, this should give a different resul
 docker build -t distroless-openvpn-client .
 ```
 
+### use in compose file
+
+```yaml
+openvpn:
+    image: gfrancqu/distroless-openvpn-client
+    volumes:
+      - /path/to/my/config.ovpn:/default.ovpn
+    dns:
+      - 208.67.222.222
+      - 208.67.222.220
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+
+  transmission:
+    depends_on: 
+      - openvpn
+    image: dperson/transmission
+    network_mode: service:openvpn
+```
+
+note the `network_mode: service:openvpn` this allow containers to share the same network stack
